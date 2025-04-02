@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Repositories
 {
-    public interface IReadRepository<Entity>:IRepository<Entity> where Entity : BaseEntity
+    public interface IReadRepository<Entity>:IRepository<Entity> where Entity : BaseEntity , new()
     {
         IQueryable<Entity> GetAll();
         IQueryable<Entity> GetWhere(Expression<Func<Entity, bool>> method);

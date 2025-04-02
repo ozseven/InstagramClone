@@ -14,7 +14,7 @@ namespace Infrastructure.Extensions
 {
     public static class Registration
     {
-        public static IServiceCollection AddInfrastructureRegistration(IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureRegistration(this IServiceCollection services,IConfiguration configuration)
         {
 
             services.AddDbContext<ApplicationDbContext>(conf =>

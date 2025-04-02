@@ -12,7 +12,7 @@ using Infrastructure.Context;
 
 namespace Infrastructure.Repositories
 {
-    public class ReadRepository<Entity> :Repository<Entity>, IReadRepository<Entity> where Entity :BaseEntity
+    public class ReadRepository<Entity> :Repository<Entity>, IReadRepository<Entity> where Entity :BaseEntity,new()
     {
         public ReadRepository(ApplicationDbContext context) : base(context)
         {
@@ -21,7 +21,7 @@ namespace Infrastructure.Repositories
         public IQueryable<Entity> GetAll()
             => Table.Where(i => i.IsDeleted == false);
 
-        public async Task<Entity> GetByIdAsync(Guid id)
+        public async Task<Entity?> GetByIdAsync(Guid id)
             => await Table.FirstOrDefaultAsync(i => i.Id == id && !i.IsDeleted);
 
         public async Task<Entity> GetSingleAsync(Expression<Func<Entity, bool>> method,

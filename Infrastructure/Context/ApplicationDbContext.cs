@@ -85,6 +85,7 @@ namespace Infrastructure.Context
                 .Select(i => (BaseEntity)i.Entity);
 
             PrepareAddedEntities(addedEntites);
+            PrepareUpdatedEntities(updatedEntites);
         }
 
         private void PrepareAddedEntities(IEnumerable<BaseEntity> entities)
@@ -93,6 +94,14 @@ namespace Infrastructure.Context
             {
                 if (entity.CreatedAt == DateTime.MinValue)
                     entity.CreatedAt = DateTime.Now;
+            }
+        }
+        private void PrepareUpdatedEntities(IEnumerable<BaseEntity> entities)
+        {
+            foreach (var item in entities)
+            {
+                if (item.UpdatedAt == DateTime.MinValue)
+                    item.UpdatedAt = DateTime.Now;
             }
         }
 

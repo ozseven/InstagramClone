@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Repositories
 {
-    public interface IPostWriteRepository : IReadRepository<Post>
+    public interface IPostWriteRepository : IWriteRepository<Post>
     {
     }
 }
