@@ -1,7 +1,9 @@
+using Application.Authorization.Policies;
 using Common.Models.RequestModels.Create.Entities;
 using Common.Models.RequestModels.Delete;
 using Common.Models.RequestModels.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -32,6 +34,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = AuthorizationPolicies.PostOwner)]
         public async Task<IActionResult> Delete(DeleteCommentCommand deleteCommentCommand)
         {
             var result = await _mediator.Send(deleteCommentCommand);

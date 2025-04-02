@@ -2,6 +2,7 @@ using Application.Features.Commands.Create;
 using Application.Features.Commands.Delete;
 using Application.Features.Commands.Update;
 using Application.Mapping;
+using Application.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -16,7 +17,7 @@ namespace Application
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             
             services.AddAutoMapper(typeof(MappingProfile));
-            
+            services.AddScoped<IJwtService, JwtService>();
             return services;
         }
     }

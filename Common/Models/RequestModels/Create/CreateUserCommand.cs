@@ -1,4 +1,5 @@
 ﻿using Common.Models.RequestModels.Create.Entities;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace Common.Models.RequestModels.Create
         public string LastName { get; set; }
         public string ProfilePhotoLink { get; set; }
         public string About { get; set; }
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
+        public Roles Role { get; set; }
         public bool IsPrivate { get; set; }
     }
 }

@@ -2,6 +2,7 @@ using Common.Models.RequestModels.Create;
 using Common.Models.RequestModels.Delete;
 using Common.Models.RequestModels.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -38,10 +39,11 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> Delete(DeleteUserCommand deleteUserCommand)
         {
-            var result = await _mediator.Send(new DeleteUserCommand { Id = id });
+            var result = await _mediator.Send(deleteUserCommand);
             return Ok(result);
         }
     }

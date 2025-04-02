@@ -2,7 +2,11 @@ using Common.Models.RequestModels.Create.Entities;
 using Common.Models.RequestModels.Delete;
 using Common.Models.RequestModels.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Application.Authorization.Requirements;
+using Application.Authorization.Policies;
+using Domain;
 
 namespace WebApi.Controllers
 {
@@ -18,6 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreatePostCommand command)
         {
             var result = await _mediator.Send(command);
@@ -25,16 +30,18 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Policy = AuthorizationPolicies.PostOwner)]
         public async Task<IActionResult> Update([FromBody] UpdatePostCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Delete(DeletePostCommand deletePostCommand)
         {
-            var result = await _mediator.Send(new DeletePostCommand { Id = id });
+            var result = await _mediator.Send(deletePostCommand);
             return Ok(result);
         }
     }

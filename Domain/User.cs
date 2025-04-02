@@ -17,6 +17,7 @@ namespace Domain
         public string ProfilePhotoLink { get; set; }
         public string About { get; set; }
         public Gender Gender { get; set; }
+        public Roles Role { get; set; } = Roles.User;
         public Boolean IsPrivate { get; set; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Post> Posts { get; set; }
@@ -31,5 +32,10 @@ namespace Domain
         Unknown,
         Man,
         Woman
+    }
+    public enum Roles
+    {
+        Admin,
+        User
     }
 }
